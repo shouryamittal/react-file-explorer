@@ -17,32 +17,44 @@ const menuOptionList = [
   }
 ];
 
-
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      level: 0,
-      home: [{name:''}],
+      home: [],
       selectedMenuOpt: 'home'
     };
-
-    this.handleCreateFolder = this.handleCreateFolder.bind(this);
     this.handleChangeMenuOpt = this.handleChangeMenuOpt.bind(this);
+    this.handleCreateFolder = this.handleCreateFolder.bind(this);
+    this.handleDeleteFolder = this.handleDeleteFolder.bind(this);
+    this.handleRenameFolder = this.handleRenameFolder.bind(this);
   }
 
   handleCreateFolder(menuOpt, folder) {
-    let menuOptList = [];
+    let folderList = [];
     if(this.state[menuOpt]) {
-      menuOptList = [...this.state[menuOpt], folder];
+      folderList = [...this.state[menuOpt], folder];
     }
     else {
-      menuOptList = [folder];
+      folderList = [folder];
     }
     this.setState({
-      [menuOpt]: menuOptList
+      [menuOpt]: folderList
     });
+  }
+
+
+  handleDeleteFolder(menuOpt, folderName) {
+    console.log('delete')
+    let folderList = this.state[menuOpt];
+    let index = folderList.findIndex(folder => folder.name === folderName);
+    let updatedFolderList = [...folderList.slice(0, index), ...folderList.slice(index + 1)];
+    this.setState({[menuOpt]: updatedFolderList});
+  }
+
+  handleRenameFolder(menuOpt, folder) {
+    
   }
 
   handleChangeMenuOpt(selectedMenuOpt) {
@@ -58,7 +70,10 @@ class App extends Component {
           <FolderContainer level={this.state.level}
                            menuOpt = {this.state.selectedMenuOpt} 
                            folders={this.state[this.state.selectedMenuOpt]}
-                           createFolder={this.handleCreateFolder}/>
+                           createFolder={this.handleCreateFolder}
+                           deleteFolder={this.handleDeleteFolder}
+                           renameFolder={this.handleRenameFolder}/>
+                           
         </div>
       </div>
     );

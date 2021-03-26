@@ -1,0 +1,11 @@
+.folderNamePopup {
+    min-width: 200px;
+    background-color: #ffff;
+    padding: 15px;
+    height: 100px;
+    position:absolute;
+    top:-webkit-calc(50% - 100px); 
+    left:-webkit-calc(50% - 100px); 
+    z-index:3;
+    border-radius: 5px;
+}

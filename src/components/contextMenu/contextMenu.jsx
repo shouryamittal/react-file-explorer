@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../styles/contextMenu.css';
 
 class ContextMenu extends Component {
 
@@ -14,7 +15,7 @@ class ContextMenu extends Component {
         let {menuOpts, xPos, yPos} = this.props;
         let menuHtml = (menuOpts || []).map((opt, index) => (<div key={index} onClick={() => {this.handleEvent(opt);}} className="option">{opt}</div>));
         return(
-            <div className="contextMenu" style={{position:'absolute', left:xPos, top: yPos, backgroundColor:'blue', color:'white', height:'100px'}}>
+            <div className="contextMenu" style={{left:xPos, top: yPos}}>
                 {menuHtml}
             </div>
         )

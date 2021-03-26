@@ -12,7 +12,8 @@ class MenuOption extends Component {
 
     render() {
         let {name, id} = this.props.data;
-        return(<div className="menuOption" data-optid={id} onClick={this.selectMenuOpt}>{name}</div>);
+        let selectedOpt = this.props.selectedOpt;
+        return(<div className={(selectedOpt === id ? 'selected': '') + " menuOption"} data-optid={id} onClick={this.selectMenuOpt}>{name}</div>);
     }
 }
 

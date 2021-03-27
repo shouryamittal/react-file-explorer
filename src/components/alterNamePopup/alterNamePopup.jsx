@@ -6,8 +6,11 @@ class FolderNamePopup extends Component {
         this.state ={
             folderName: ''
         };
+
+        this.inputRef = React.createRef();
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.closePopup = this.closePopup.bind(this);
     }
 
     handleInputChange(e) {
@@ -15,16 +18,31 @@ class FolderNamePopup extends Component {
     }
 
     handleSubmit(e) {
+        e.preventDefault();
+        this.props.alterFolderName(this.state.folderName);
         if(e.keyCode === 13 && this.state.folderName.length) {
-            this.props.alterFolderName(this.state.folderName);
+            
         }
+    }
+
+    closePopup() {
+        this.props.close();
+    }
+
+    componentDidMount() {
+        this.inputRef.current.focus();
     }
     
     render() {
         return (
-            <div className="folderNamePopup">
+            <div className="folderNamePopup" data-testid='popup' onSubmit={this.handleSubmit}>
                <p>Enter Folder Name: </p>
-               <input type="text" value={this.state.folderName} onChange={this.handleInputChange} onKeyUp={this.handleSubmit}/>
+               <form name="alterNameForm" data-testid='form'>
+                    <input ref={this.inputRef} placeholder='Folder Name' type="text" value={this.state.folderName} onChange={this.handleInputChange}/>
+               </form>
+               <div className="closeBtn">
+                            <button onClick={this.closePopup}>Close</button>
+                </div>
             </div>
         );
     }

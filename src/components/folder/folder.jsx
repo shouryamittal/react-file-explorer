@@ -14,7 +14,6 @@ class Folder extends Component {
 
     handleContextMenu(event) {
         event.preventDefault();
-        event.stopPropagation()
         this.props.handleContextMenu(event, Consts.FOLDER_CTX_MENU, this.props.name);
     }
 
@@ -26,7 +25,7 @@ class Folder extends Component {
     render() {
         let folderName = this.props.name;
         return(
-            <div id="folder" className="folder" title = {folderName} onClick={this.handleClick} draggable onContextMenu={this.handleContextMenu} onDoubleClick={this.handleDoubleClick}>
+            <div id="folder" className="folder" data-testid='folder' title = {folderName} onClick={this.handleClick} draggable onContextMenu={this.handleContextMenu} onDoubleClick={this.handleDoubleClick}>
                 <div className="folderIcon"></div>
                 <div className="folderName">{folderName}</div>
             </div>

@@ -2,10 +2,23 @@
     min-width: 200px;
     background-color: #ffff;
     padding: 15px;
-    height: 100px;
+    /* height: 100px; */
     position:absolute;
     top:-webkit-calc(50% - 100px); 
     left:-webkit-calc(50% - 100px); 
     z-index:3;
     border-radius: 5px;
+}
+
+.closeBtn {
+    margin-top: 10px;
+}
+button {
+    float: right;
+    color:#5FCFFC;
+    font-size: 12px;
+    line-height: 14px;
+    border:none;
+    outline: none;
+    background-color: transparent;
 }

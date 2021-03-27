@@ -13,9 +13,9 @@ class ContextMenu extends Component {
 
     render() {
         let {menuOpts, xPos, yPos} = this.props;
-        let menuHtml = (menuOpts || []).map((opt, index) => (<div key={index} onClick={() => {this.handleEvent(opt);}} className="option">{opt}</div>));
+        let menuHtml = (menuOpts || []).map((opt, index) => (<div key={index} onClick={() => {this.handleEvent(opt);}} data-testid={opt} className="option">{opt}</div>));
         return(
-            <div className="contextMenu" style={{left:xPos, top: yPos}}>
+            <div className="contextMenu" data-testid="ctxMenu" style={{left:xPos, top: yPos}}>
                 {menuHtml}
             </div>
         )

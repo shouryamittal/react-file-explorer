@@ -9,9 +9,8 @@ class App extends Component {
     super(props);
     this.state = {
       level:0,
-      maxLevel:0,
       parent:'root',
-      home: [],
+      home: [{level: 0, parent:'root', name:'dummy'}],
       selectedMenuOpt: 'home',
       showSiteMask: false
     };
@@ -53,11 +52,11 @@ class App extends Component {
   }
 
   handleOpenFolder(folderName) {
-    this.setState({level: this.state.level + 1, maxLevel: this.state.maxLevel + 1, parent: folderName})
+    this.setState({level: this.state.level + 1, parent: folderName})
   }
 
   handleChangeMenuOpt(selectedMenuOpt) {
-    this.setState({selectedMenuOpt: selectedMenuOpt, level: 0, parent:'root', maxLevel: 0});
+    this.setState({selectedMenuOpt: selectedMenuOpt, level: 0, parent:'root'});
   }
 
   handleSiteMaskVisibility(showSiteMask) {
@@ -83,11 +82,10 @@ class App extends Component {
     let foldersForCurrentMenuOpt = this.state[this.state.selectedMenuOpt];
     let folders = (foldersForCurrentMenuOpt || []).filter(folder => folder.parent === this.state.parent); 
     return(
-      <div className="appContainer">
+      <div className="appContainer" data-testid="appContainer">
         <div className="d-flex">
           <MenuOptionsList menuOptions = {Consts.MENU_LIST} selectedOpt = {this.state.selectedMenuOpt} changeMenuOpt={this.handleChangeMenuOpt}/>
           <FolderContainer level={this.state.level}
-                           maxLevel={this.state.maxLevel}
                            parent = {this.state.parent}
                            menuOpt = {this.state.selectedMenuOpt} 
                            folders={folders}
@@ -98,7 +96,7 @@ class App extends Component {
                            openFolder = {this.handleOpenFolder}
                            nextLevel = {this.goToNextLevel}
                            prevLevel = {this.goToPrevLevel}/>
-          {this.state.showSiteMask ? <div className="siteMask"></div>:null}
+          {this.state.showSiteMask ? <div className="siteMask" data-testid="sitemask"></div>:null}
                            
         </div>
       </div>

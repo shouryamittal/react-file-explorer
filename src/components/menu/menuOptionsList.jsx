@@ -10,7 +10,7 @@ class MenuOptionsList extends Component {
             return (<MenuOption key={option.id} data={option} selectedOpt={selectedOpt} changeMenuOpt={this.props.changeMenuOpt}/>);
         });
 
-        return(<div className="menuOptionList">{menuOptHtml}</div>);
+        return(<div className="menuOptionList" data-testid="menuList">{menuOptHtml}</div>);
     }
 }
 

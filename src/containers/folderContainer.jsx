@@ -22,6 +22,7 @@ class FolderContainer extends Component {
       this.handleClick = this.handleClick.bind(this);
       this.handleContextMenuEvent = this.handleContextMenuEvent.bind(this);
       this.createOrRenameFolder = this.createOrRenameFolder.bind(this);
+      this.closeAlterNamePopup = this.closeAlterNamePopup.bind(this);
     }
 
     handleClick() {
@@ -63,6 +64,11 @@ class FolderContainer extends Component {
       }
     }
     
+    closeAlterNamePopup() {
+      this.setState({showNamePopup:false});
+      this.props.toggleSiteMask(false);
+    }
+
     createOrRenameFolder(folderName) {
       if(this.state.createFolder) {
         let folder = {
@@ -94,12 +100,12 @@ class FolderContainer extends Component {
 
         let {showCtxMenu, xPos, yPos, showNamePopup }= this.state;
         return(
-          <div className="folderListContainer" onClick={this.handleClick} onContextMenu={(event) => {this.handleContextMenu(event,Consts.FOLDER_CONTAINER_CTX_MENU)}}>
+          <div className="folderListContainer" data-testid='folderContainer' onClick={this.handleClick} onContextMenu={(event) => {this.handleContextMenu(event,Consts.FOLDER_CONTAINER_CTX_MENU)}}>
             
-            <Navigator goToPrevLevel={this.props.prevLevel} goToNextLevel={this.props.nextLevel} maxLevel={this.props.maxLevel} level={this.props.level}/>
+            <Navigator goToPrevLevel={this.props.prevLevel} goToNextLevel={this.props.nextLevel} level={this.props.level}/>
             {folderListHtml}
             {showCtxMenu ? <ContextMenu menuOpts = {this.state.ctxMenuOpts} xPos={xPos} yPos={yPos} handleMenuEvent = {this.handleContextMenuEvent}/>: null}
-            {showNamePopup? <FolderNamePopup alterFolderName={this.createOrRenameFolder}/> : null}
+            {showNamePopup? <FolderNamePopup alterFolderName={this.createOrRenameFolder} close={this.closeAlterNamePopup}/> : null}
           </div>  
         );
     }

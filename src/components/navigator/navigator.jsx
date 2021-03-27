@@ -14,11 +14,10 @@ class Navigator extends Component {
         this.props.goToNextLevel();
     }
     render() {
-        let {maxLevel, level} = this.props;
+        let level = this.props.level;
         return(
             <div className="navigator">
                 <span className={level === 0 ? "disabled":'enabled'} onClick={this.decrementLevel}>&#8249;</span>
-                <span className={level === maxLevel ? "disabled": 'enabled'} onClick={this.incrementLevel}>&#8250;</span>
             </div>
         );
     }

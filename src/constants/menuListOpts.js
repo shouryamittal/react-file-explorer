@@ -1,4 +1,4 @@
-export default {
+let navMenuConsts = {
     MENU_LIST: [
         {
           id:'home',
@@ -13,3 +13,5 @@ export default {
         }
     ]
 };
+
+export default navMenuConsts;
